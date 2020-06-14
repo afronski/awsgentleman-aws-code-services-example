@@ -1,5 +1,9 @@
 # `awsgentleman-aws-code-services-example`
 
+## Architecture
+
+![Architecture Diagram](./docs/diagram.png)
+
 ## Description
 
 Set of tools used for a *Twitch* stream about *AWS Code* services family.
