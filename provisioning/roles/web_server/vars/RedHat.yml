@@ -1,0 +1,7 @@
+---
+web_server:
+  docroot: /var/www/html
+  package: httpd
+  service: httpd
+  user: apache
+  group: apache

@@ -1,0 +1,23 @@
+---
+- name: Securing access to the sshd_config file.
+  file:
+    path: /etc/ssh/sshd_config
+    mode: "0600"
+  when: ansible_facts['distribution'] == "Ubuntu" and
+        ansible_facts['distribution_major_version'] == "16"
+
+- name: Setting proper and default umask for bash.bashrc file.
+  lineinfile:
+    path: /etc/bash.bashrc
+    line: 'umask 027'
+    insertbefore: BOF
+  when: ansible_facts['distribution'] == "Ubuntu" and
+        ansible_facts['distribution_major_version'] == "16"
+
+- name: Setting proper and default umask for the main profile file.
+  lineinfile:
+    path: /etc/profile
+    line: 'umask 027'
+    insertbefore: BOF
+  when: ansible_facts['distribution'] == "Ubuntu" and
+        ansible_facts['distribution_major_version'] == "16"

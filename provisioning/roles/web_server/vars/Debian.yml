@@ -1,0 +1,7 @@
+---
+web_server:
+  docroot: /var/www/html
+  package: apache2
+  service: apache2
+  user: www-data
+  group: www-data

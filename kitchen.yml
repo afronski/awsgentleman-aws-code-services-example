@@ -1,0 +1,41 @@
+---
+transport:
+  max_ssh_sessions: 6
+
+driver:
+  name: vagrant
+
+provisioner:
+  name: ansible_playbook
+  hosts: all
+  require_ansible_repo: true
+  require_ansible_omnibus: false
+  ansible_verbose: true
+  ansible_verbosity: 1
+  ansible_diff: true
+  roles_path: provisioning/roles
+  playbook: provisioning/playbook.yml
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-18.04
+    driver_config:
+      network:
+        - ["forwarded_port", {guest: 80, host: 8080}]
+  - name: ubuntu-16.04
+    driver_config:
+      network:
+        - ["forwarded_port", {guest: 80, host: 8081}]
+  - name: centos-7
+    driver_config:
+      network:
+        - ["forwarded_port", {guest: 80, host: 8082}]
+
+suites:
+  - name: default
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+        - test/security/default

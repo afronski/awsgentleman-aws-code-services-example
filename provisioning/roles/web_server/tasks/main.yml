@@ -1,0 +1,36 @@
+---
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Ensure Apache Server-related packages are installed.
+  package:
+    name: "{{ web_server.package }}"
+    state: present
+
+- name: Ensure Apache Server is running and enabled as configured.
+  service:
+    name: "{{ web_server.service }}"
+    state: started
+    enabled: true
+
+- name: Open port 80 for Apache Server (specific for Ubuntu).
+  ufw:
+    rule: allow
+    name: Apache
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Open port 80 for Apache Server (specific for CentOS).
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Generate the example HTML file.
+  template:
+    src: index.html.j2
+    dest: "{{ web_server.docroot }}/index.html"
+    owner: "{{ web_server.user }}"
+    group: "{{ web_server.group }}"
+    mode: "u=rw,g=r,o=r"
+  notify: Restart Apache Server.

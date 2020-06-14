@@ -1,0 +1,48 @@
+---
+- name: Install common packages.
+  package:
+    name:
+      - htop
+      - curl
+      - mc
+      - net-tools
+      - lsof
+      - nmap
+      - iotop
+    state: present
+
+- name: Install common packages (specific for Ubuntu).
+  package:
+    name:
+      - apt-utils
+    state: present
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Open port 22 for OpenSSH (specific for Ubuntu).
+  ufw:
+    rule: allow
+    name: OpenSSH
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Install common packages (specific for CentOS).
+  package:
+    name:
+      - yum-utils
+      - firewalld
+      - python-firewall
+    state: present
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Ensure firewalld is running and enabled as configured.
+  service:
+    name: firewalld
+    state: started
+    enabled: true
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Open port 22 for OpenSSH (specific for CentOS).
+  firewalld:
+    port: 22/tcp
+    permanent: yes
+    state: enabled
+  when: ansible_facts['distribution'] == "CentOS"

@@ -1,0 +1,10 @@
+name: test-smoke-default
+title: InSpec profile for Smoke Tests
+maintainer: Wojciech Gawroński <wgawronski@white-rook.pl>
+copyright: Wojciech Gawroński <wgawronski@white-rook.pl>
+copyright_email: wgawronski@white-rook.pl
+license: MIT
+summary: Demonstrates the use of Custom Resources inside InSpec with Kitchen.
+version: 1.0.0
+supports:
+  - os-family: linux

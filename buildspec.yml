@@ -1,0 +1,40 @@
+---
+version: 0.2
+
+env:
+  variables:
+    INSPEC_VERSION: "4.16.0"
+    ANSIBLE_VERSION: "2.7.8"
+    PACKER_VERSION: "1.4.4"
+
+    CHEF_LICENSE: accept-no-persist
+
+    SOURCE_AMI: "ami-0542dd5aec286b298"
+
+    AWS_SECURITY_GROUP: "sg-016b3b9ecc13ce81b"
+
+phases:
+  install:
+    runtime-versions:
+      ruby: 2.6
+      python: 3.7
+
+  pre_build:
+    commands:
+      - echo "Installing InSpec..."
+      - gem install inspec-bin -v "${INSPEC_VERSION}" --no-document
+
+      - echo "Installing Ansible..."
+      - pip install ansible=="${ANSIBLE_VERSION}"
+
+      - echo "Installing Packer..."
+      - curl -qL -o packer.zip "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip" && unzip packer.zip
+
+  build:
+    commands:
+      - echo "Provisioning, building and testing our AMI..."
+      - ./packer build -var "aws_region=${AWS_REGION}" -var "source_ami=${SOURCE_AMI}" -var "aws_security_group_id=${SECURITY_GROUP}" builder.json
+
+  post_build:
+    commands:
+      - echo "Packer build completed on `date`."
