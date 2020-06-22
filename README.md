@@ -6,7 +6,7 @@
 
 ## Description
 
-Set of tools used for a *Twitch* stream about *AWS Code* services family.
+Set of tools used for a *live stream* about *AWS Code* services family.
 
 ## Prerequisites
 
