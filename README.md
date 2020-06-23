@@ -6,7 +6,7 @@
 
 ## Description
 
-Set of tools used for a *live stream* about *AWS Code* services family.
+Set of tools used for a [AWS Gentleman live stream](https://awsgentleman.com/live) about *AWS Code* services family.
 
 ## Prerequisites
 
