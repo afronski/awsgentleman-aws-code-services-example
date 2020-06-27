@@ -1,4 +1,4 @@
-# `awsgentleman-aws-code-services-example`
+# `awsmaniac-aws-code-services-example`
 
 ## Architecture
 
@@ -6,7 +6,7 @@
 
 ## Description
 
-Set of tools used for a [AWS Gentleman live stream](https://awsgentleman.com/live) about *AWS Code* services family.
+Set of tools used for a [AWS Maniac live stream](https://awsmaniac.com/live) about *AWS Code* services family.
 
 ## Prerequisites
 
@@ -25,4 +25,4 @@ Set of tools used for a [AWS Gentleman live stream](https://awsgentleman.com/liv
 
 ## Authors
 
-- [Wojciech Gawroński (afronski) - AWS Gentleman](https://github.com/afronski)
+- [Wojciech Gawroński (afronski) - AWS Maniac](https://github.com/afronski)
