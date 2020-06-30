@@ -49,7 +49,7 @@ describe file(index_file) do
 
   its('mode') { should cmp '0644' }
 
-  its('content') { should match /AWS Gentleman/ }
+  its('content') { should match /AWS Maniac/ }
 end
 
 control 'ownership-of-var-www-html-index-at-ubuntu' do
